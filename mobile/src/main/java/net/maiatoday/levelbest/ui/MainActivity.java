@@ -1,5 +1,6 @@
-package net.maiatoday.levelbest;
+package net.maiatoday.levelbest.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,11 +10,23 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import net.maiatoday.levelbest.LevelBestApplication;
+import net.maiatoday.levelbest.R;
+import net.maiatoday.levelbest.helpers.PreferenceHelper;
+
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
+    @Inject
+    SharedPreferences prefs;
+    private boolean firstTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((LevelBestApplication)getApplication()).getComponent().inject(this);
+        firstTime = prefs.getBoolean(PreferenceHelper.KEY_FIRST_TIME, true);
+        PreferenceHelper.write(prefs, PreferenceHelper.KEY_FIRST_TIME, false);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -22,8 +35,14 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (firstTime) {
+                    Snackbar.make(view, "First Time - Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                }
             }
         });
     }
