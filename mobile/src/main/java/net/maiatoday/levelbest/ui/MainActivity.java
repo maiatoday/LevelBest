@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import net.maiatoday.levelbest.LevelBestApplication;
 import net.maiatoday.levelbest.R;
 import net.maiatoday.levelbest.helpers.PreferenceHelper;
@@ -19,6 +21,10 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity {
     @Inject
     SharedPreferences prefs;
+
+    @Inject
+    FirebaseAnalytics analytics;
+
     private boolean firstTime;
 
     @Override
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         ((LevelBestApplication)getApplication()).getComponent().inject(this);
         firstTime = prefs.getBoolean(PreferenceHelper.KEY_FIRST_TIME, true);
         PreferenceHelper.write(prefs, PreferenceHelper.KEY_FIRST_TIME, false);
+        analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "test");
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+                analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
                 if (firstTime) {
                     Snackbar.make(view, "First Time - Replace with your own action", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();

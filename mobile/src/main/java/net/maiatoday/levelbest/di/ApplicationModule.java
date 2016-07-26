@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import net.maiatoday.levelbest.helpers.PreferenceHelper;
 
 import javax.inject.Singleton;
@@ -26,13 +28,19 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public Context providesContext() {
+    Context providesContext() {
         return application;
     }
 
     @Provides
     @Singleton
-    public SharedPreferences provideSharedPreferences(Context context) {
+    SharedPreferences provideSharedPreferences(Context context) {
         return context.getSharedPreferences(PreferenceHelper.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+    }
+
+    @Provides
+    @Singleton
+    FirebaseAnalytics provideAnalytics(Context context) {
+        return FirebaseAnalytics.getInstance(context);
     }
 }
