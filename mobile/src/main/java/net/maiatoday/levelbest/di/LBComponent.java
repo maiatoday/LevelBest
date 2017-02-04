@@ -10,4 +10,5 @@ import net.maiatoday.levelbest.ui.MainActivity;
 public interface LBComponent {
 
     void inject(MainActivity target);
+//    void inject(EntryActivity target);
 }
