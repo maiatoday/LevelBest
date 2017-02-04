@@ -1,4 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+
+if (project.hasProperty("levelBest.signing")
+        && new File(project.property("levelBest.signing") + ".gradle").exists()) {
+    apply from: project.property("levelBest.signing") + ".gradle";
+}
 
 android {
     compileSdkVersion sdkVer
@@ -9,9 +15,8 @@ android {
         targetSdkVersion sdkVer
         versionCode 1
         versionName "0.1"
+        vectorDrawables.useSupportLibrary = "true"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-//        testInstrumentationRunner "net.levelbest.MockLBTestRunner"
     }
     buildTypes {
         release {
@@ -51,6 +56,10 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     compile "com.google.firebase:firebase-core:$rootProject.firebaseVersion"
     compile "com.google.firebase:firebase-crash:$rootProject.firebaseVersion"
+
+    compile 'com.facebook.stetho:stetho:1.4.2'
+    compile 'com.uphyca:stetho_realm:2.0.0'
+    compile 'com.github.thorbenprimke:realm-recyclerview:0.9.25'
 
 }
 
