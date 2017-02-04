@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                             .setAction("Action", null).show();
 
                 }
+                startActivity(new Intent(MainActivity.this, EntryActivity.class));
             }
         });
     }

@@ -6,6 +6,8 @@ import net.maiatoday.levelbest.di.ApplicationModule;
 import net.maiatoday.levelbest.di.DaggerApplicationComponent;
 import net.maiatoday.levelbest.di.LBComponent;
 
+import io.realm.Realm;
+
 /**
  * Level Best Application
  * Created by maia on 2016/07/25.
@@ -20,6 +22,7 @@ public class LevelBestApplication extends Application {
     public void onCreate() {
         super.onCreate();
         component = createComponent();
+        Realm.init(this);
     }
 
     public LBComponent createComponent() {
