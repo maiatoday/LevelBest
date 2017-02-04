@@ -1,6 +1,7 @@
 package net.maiatoday.levelbest.ui;
 
 import android.content.SharedPreferences;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.maiatoday.levelbest.LevelBestApplication;
 import net.maiatoday.levelbest.R;
+import net.maiatoday.levelbest.databinding.ActivityMainBinding;
 import net.maiatoday.levelbest.helpers.PreferenceHelper;
 
 import javax.inject.Inject;
@@ -34,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
         firstTime = prefs.getBoolean(PreferenceHelper.KEY_FIRST_TIME, true);
         PreferenceHelper.write(prefs, PreferenceHelper.KEY_FIRST_TIME, false);
         analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = binding.fab;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
