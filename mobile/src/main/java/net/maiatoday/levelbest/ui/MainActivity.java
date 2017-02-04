@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
                 analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
                 if (firstTime) {
-                    Snackbar.make(view, "First Time - Replace with your own action", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "First Time - Replace with your own action "+utils.DemoUtils.addTest(2,4), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 } else {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "Replace with your own action "+utils.DemoUtils.addTest(4,4), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
                 }

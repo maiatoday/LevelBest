@@ -20,6 +20,8 @@ buildscript {
 
         realmVersion = '2.3.0'
         realmAdapterVersion = '1.4.0'
+
+        kotlinVersion = '1.0.6'
     }
 
     repositories {
@@ -30,6 +32,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.0-beta3'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "io.realm:realm-gradle-plugin:${realmVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'kotlin-android'
 
 if (project.hasProperty("levelBest.signing")
         && new File(project.property("levelBest.signing") + ".gradle").exists()) {
@@ -26,6 +27,9 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 }
 
@@ -60,6 +64,8 @@ dependencies {
     compile 'com.facebook.stetho:stetho:1.4.2'
     compile 'com.uphyca:stetho_realm:2.0.0'
     compile 'com.github.thorbenprimke:realm-recyclerview:0.9.25'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlinVersion"
 
 }
 
