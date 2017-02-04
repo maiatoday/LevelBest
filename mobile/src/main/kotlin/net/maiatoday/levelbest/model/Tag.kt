@@ -1,15 +1,16 @@
-package net.maiatoday.levelbest.data
+package net.maiatoday.levelbest.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
 
 /**
- * Mood object describing a mood
+ * Tag to sort entries
  * Created by maia on 2017/02/04.
  */
 
-open class Mood : RealmObject() {
+open class Tag : RealmObject() {
+
     @Required @PrimaryKey open var id: String = ""
     open var title: String = ""
 }

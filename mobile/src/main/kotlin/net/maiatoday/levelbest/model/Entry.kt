@@ -1,4 +1,4 @@
-package net.maiatoday.levelbest.data
+package net.maiatoday.levelbest.model
 
 import java.util.Date
 
@@ -19,7 +19,8 @@ open class Entry(
         open var tags: RealmList<Tag> = RealmList(),
         open var moods: RealmList<Mood> = RealmList(),
         open var sentiment: Int = 0,
-        open var energyLevel: Int = 0
+        open var energyLevel: Int = 0,
+        open var note:String = ""
 ) : RealmObject() {
     // Realm overloads generated getters and setters
 }
