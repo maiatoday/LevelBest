@@ -41,7 +41,7 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-library:$rootProject.hamcrestVersion"
 
     compile "com.google.dagger:dagger:$rootProject.daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
 
     androidTestCompile "junit:junit:$rootProject.junitVersion"
     androidTestCompile("com.android.support.test:runner:$rootProject.supportTestVersion") {
@@ -65,7 +65,7 @@ dependencies {
     compile "com.google.firebase:firebase-core:$rootProject.firebaseVersion"
     compile "com.google.firebase:firebase-crash:$rootProject.firebaseVersion"
 
-
+    kapt "com.android.databinding:compiler:$rootProject.gradleAndroidPluginVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlinVersion"
 
     compile 'com.facebook.stetho:stetho:1.4.2'
@@ -76,6 +76,10 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+}
+
+kapt {
+    generateStubs = true
 }
 
 apply plugin: 'com.google.gms.google-services'

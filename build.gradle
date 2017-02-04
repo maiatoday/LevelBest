@@ -6,6 +6,7 @@ buildscript {
         buildToolsVer = '25.0.2'
         sdkVer = 25
 
+        gradleAndroidPluginVersion = '2.3.0-beta3'
         // App dependencies
         supportLibraryVersion = '25.1.1'
         playServicesVersion = '10.0.1'
@@ -29,7 +30,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0-beta3'
+        classpath "com.android.tools.build:gradle:${gradleAndroidPluginVersion}"
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "io.realm:realm-gradle-plugin:${realmVersion}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
