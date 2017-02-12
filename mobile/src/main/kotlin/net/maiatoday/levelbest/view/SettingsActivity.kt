@@ -1,4 +1,4 @@
-package net.maiatoday.levelbest.ui
+package net.maiatoday.levelbest.view
 
 
 import android.annotation.TargetApi

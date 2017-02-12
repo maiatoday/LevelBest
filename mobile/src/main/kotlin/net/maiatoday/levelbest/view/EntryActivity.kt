@@ -1,9 +1,9 @@
-package net.maiatoday.levelbest.ui
+package net.maiatoday.levelbest.view
 
 import android.content.SharedPreferences
 import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -11,10 +11,9 @@ import io.realm.Realm
 import io.realm.RealmChangeListener
 import io.realm.RealmObject
 import net.maiatoday.levelbest.LevelBestApplication
-
 import net.maiatoday.levelbest.R
-import net.maiatoday.levelbest.model.Entry
 import net.maiatoday.levelbest.databinding.ActivityEntryBinding
+import net.maiatoday.levelbest.model.Entry
 import net.maiatoday.levelbest.model.Mood
 import net.maiatoday.levelbest.model.Tag
 import java.util.*
@@ -29,11 +28,11 @@ class EntryActivity : AppCompatActivity() {
         val TAG: String = EntryActivity::class.java.simpleName
     }
 
-//    @Inject
-//    var prefs: SharedPreferences? = null
-//
-//    @Inject
-//    var analytics: FirebaseAnalytics? = null
+    @Inject
+    lateinit var prefs: SharedPreferences
+
+    @Inject
+    lateinit var analytics: FirebaseAnalytics
 
     private var realmUI: Realm by Delegates.notNull()
     private var binding: ActivityEntryBinding by Delegates.notNull()
@@ -44,7 +43,7 @@ class EntryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //(application as LevelBestApplication).component.inject(this)
+        (application as LevelBestApplication).component.inject(this)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_entry)
 
