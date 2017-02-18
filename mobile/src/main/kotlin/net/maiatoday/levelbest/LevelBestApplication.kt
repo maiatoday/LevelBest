@@ -18,7 +18,6 @@ import io.realm.Realm
 
 class LevelBestApplication : Application() {
 
-
     lateinit var component: LBComponent
         private set // the setter is private and has the default implementation
 
