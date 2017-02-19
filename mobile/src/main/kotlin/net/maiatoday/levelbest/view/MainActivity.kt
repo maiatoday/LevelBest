@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as LevelBestApplication).component.inject(this)
-        firstTime = prefs!!.getBoolean(PreferenceHelper.KEY_FIRST_TIME, true)
+        firstTime = prefs.getBoolean(PreferenceHelper.KEY_FIRST_TIME, true)
         PreferenceHelper.write(prefs, PreferenceHelper.KEY_FIRST_TIME, false)
 
-        analytics!!.logEvent(FirebaseAnalytics.Event.APP_OPEN, null)
+        analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id")
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "test")
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
-            analytics!!.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+            analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
             if (firstTime) {
                 Snackbar.make(view, "First Time - Replace with your own action " + addTest(2, 4), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()

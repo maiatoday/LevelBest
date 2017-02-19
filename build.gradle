@@ -19,7 +19,7 @@ buildscript {
         daggerVersion = '2.2'
         constraintLayoutVersion = '1.0.0-beta4'
 
-        realmVersion = '2.3.0'
+        realmVersion = '2.3.1'
         realmAdapterVersion = '1.4.0'
 
         kotlinVersion = '1.0.6'

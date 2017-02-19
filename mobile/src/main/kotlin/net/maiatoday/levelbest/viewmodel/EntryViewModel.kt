@@ -22,21 +22,49 @@ class EntryViewModel(id: String) : BaseObservable() {
     val listener = RealmChangeListener<Entry> { notifyChange() }
     var title: String
         @Bindable
-        get() {
-            return entry.title
-        }
+        get() = entry.title
         set(value) {
             // entry.title = value // need to do this in a transaction
-            realm.executeTransactionAsync { r ->
+            realm.executeTransaction { r ->
                 val e = searchEntry(r, uuid)
                 e.title = value
+                notifyPropertyChanged(BR.title)
             }
-            notifyPropertyChanged(BR.title)
         }
 
-    var note: String = entry.note
-    var sentiment: Int = entry.sentiment
-    var energyLevel: Int = entry.energyLevel
+    var note: String
+        @Bindable
+        get() = entry.note
+        set(value) {
+            // entry.title = value // need to do this in a transaction
+            realm.executeTransaction { r ->
+                val e = searchEntry(r, uuid)
+                e.note = value
+                notifyPropertyChanged(BR.note)
+            }
+        }
+    var sentiment: Int
+        @Bindable
+        get() = entry.sentiment
+        set(value) {
+            // entry.title = value // need to do this in a transaction
+            realm.executeTransaction { r ->
+                val e = searchEntry(r, uuid)
+                e.sentiment = value
+                notifyPropertyChanged(BR.sentiment)
+            }
+        }
+    var energyLevel: Int
+        @Bindable
+        get() = entry.energyLevel
+        set(value) {
+            // entry.title = value // need to do this in a transaction
+            realm.executeTransaction { r ->
+                val e = searchEntry(r, uuid)
+                e.energyLevel = value
+                notifyPropertyChanged(BR.energyLevel)
+            }
+        }
 
     init {
         RealmObject.addChangeListener(entry, listener)

@@ -27,8 +27,8 @@ class EntryActivity : AppCompatActivity() {
     lateinit var analytics: FirebaseAnalytics
 
     private lateinit var binding: ActivityEntryBinding
-//    private var uuid: String = "3a89e607-75ab-4029-aa7f-2a2dfab8bfe0"
-    private var uuid: String = ""
+    private var uuid: String = "3a89e607-75ab-4029-aa7f-2a2dfab8bfe0"
+//    private var uuid: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
