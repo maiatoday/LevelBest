@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -31,6 +32,24 @@ class MainActivity : AppCompatActivity() {
 
     private var firstTime: Boolean = false
 
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_moods -> {
+                startActivity(MoodsActivity.makeIntent(this))
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_tags -> {
+                startActivity(TagsActivity.makeIntent(this))
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as LevelBestApplication).component.inject(this)
@@ -41,6 +60,9 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
+
+        val navigation = binding.navigation
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val fab = binding.fab
         fab.setOnClickListener { view ->
@@ -59,26 +81,5 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(Intent(this@MainActivity, EntryActivity::class.java))
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-
-
-        if (id == R.id.action_settings) {
-            startActivity(Intent(this, SettingsActivity::class.java))
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 }

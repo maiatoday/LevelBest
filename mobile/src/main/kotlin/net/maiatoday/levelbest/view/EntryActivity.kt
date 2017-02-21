@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import com.google.firebase.analytics.FirebaseAnalytics
 import net.maiatoday.levelbest.LevelBestApplication
@@ -33,12 +34,14 @@ class EntryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as LevelBestApplication).component.inject(this)
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_entry)
         if (uuid.isBlank()) {
             uuid = EntryViewModel.makeNewEntry()
         }
         binding.viewModel = EntryViewModel(uuid)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         updateUI()
     }
 

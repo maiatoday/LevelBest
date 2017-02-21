@@ -21,9 +21,34 @@
         </activity>
         <activity
             android:name=".view.SettingsActivity"
-            android:label="@string/title_activity_settings">
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity"/>
         </activity>
-        <activity android:name=".view.EntryActivity">
+        <activity
+            android:name=".view.EntryActivity"
+            android:label="@string/record_mood"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".view.MoodsActivity"
+            android:label="@string/all_the_moods"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity"/>
+        </activity>
+        <activity android:name=".view.TagsActivity"
+                  android:label="@string/all_the_tags"
+                  android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity"/>
         </activity>
     </application>
 

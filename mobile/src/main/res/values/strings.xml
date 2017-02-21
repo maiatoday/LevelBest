@@ -76,4 +76,11 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="entry_note">Note</string>
     <string name="title">Title</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_moods">Moods</string>
+    <string name="title_tags">Tags</string>
+    <string name="title_settings">Settings</string>
+    <string name="record_mood">Record mood</string>
+    <string name="all_the_moods">All the moods</string>
+    <string name="all_the_tags">All the tags</string>
 </resources>
