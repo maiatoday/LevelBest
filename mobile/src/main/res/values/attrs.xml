@@ -1,0 +1,11 @@
+<resources>
+    <declare-styleable name="FlowLayout">
+        <attr name="fl_horizontalSpacing" format="dimension" />
+        <attr name="fl_verticalSpacing" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="FlowLayout_LayoutParams">
+        <attr name="fl_layout_breakLine" format="boolean" />
+        <attr name="fl_layout_horizontalSpacing" format="dimension" />
+    </declare-styleable>
+
+</resources>
