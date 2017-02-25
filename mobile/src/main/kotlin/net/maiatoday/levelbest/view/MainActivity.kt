@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                         .setAction("Action", null).show()
 
             }
-            startActivity(Intent(this@MainActivity, EntryActivity::class.java))
+            startActivity(EntryActivity.makeIntent(this, ""))
         }
     }
 }

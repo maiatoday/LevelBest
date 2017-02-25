@@ -1,14 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    // Define versions in a single place
+    // Define versions in a single place, the reason this is at this level is
+    // if I have a library or other module, they can all use the same versions
     ext {
         buildToolsVer = '25.0.2'
         sdkVer = 25
 
         gradleAndroidPluginVersion = '2.3.0-beta3'
         // App dependencies
-        supportLibraryVersion = '25.1.1'
+        supportLibraryVersion = '25.2.0'
         playServicesVersion = '10.0.1'
         firebaseVersion = '10.0.1'
         junitVersion = '4.12'
@@ -17,7 +18,7 @@ buildscript {
         supportTestVersion = '0.5'
         espressoVersion = '2.2.2'
         daggerVersion = '2.2'
-        constraintLayoutVersion = '1.0.0-beta4'
+        constraintLayoutVersion = '1.0.0'
 
         realmVersion = '2.3.1'
         realmAdapterVersion = '1.4.0'

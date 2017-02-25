@@ -38,6 +38,7 @@
         <activity
             android:name=".view.MoodsActivity"
             android:label="@string/all_the_moods"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".view.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -45,6 +46,7 @@
         </activity>
         <activity android:name=".view.TagsActivity"
                   android:label="@string/all_the_tags"
+                  android:theme="@style/AppTheme.NoActionBar"
                   android:parentActivityName=".view.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

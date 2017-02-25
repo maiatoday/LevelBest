@@ -1,4 +1,4 @@
-package net.maiatoday.levelbest.view
+package net.maiatoday.levelbest.view.layout
 
 import android.content.Context
 import android.util.AttributeSet
@@ -31,10 +31,10 @@ class FlowLayout(context: Context, attrs: AttributeSet) : ViewGroup(context, att
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val widthLimit = View.MeasureSpec.getSize(widthMeasureSpec) - paddingRight
-        val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
+        val widthLimit = MeasureSpec.getSize(widthMeasureSpec) - paddingRight
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
 
-        val growHeight = widthMode != View.MeasureSpec.UNSPECIFIED
+        val growHeight = widthMode != MeasureSpec.UNSPECIFIED
 
         var width = 0
 

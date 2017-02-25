@@ -14,4 +14,5 @@ import io.realm.annotations.Required
 open class Mood : RealmModel {
     @Required @PrimaryKey open var id: String = ""
     open var title: String = ""
+    open var colour: Int = -1
 }

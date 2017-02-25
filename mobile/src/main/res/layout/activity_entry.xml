@@ -10,10 +10,12 @@
             name="viewModel"
             type="net.maiatoday.levelbest.viewmodel.EntryViewModel"/>
     </data>
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context="net.maiatoday.levelbest.view.EntryActivity">
 
         <TextView
@@ -141,6 +143,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            app:layout_constraintHeight_min="48dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -153,7 +156,7 @@
             <EditText
                 android:id="@+id/entry_note_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/entry_note"
                 android:text="@={viewModel.note}"
@@ -182,4 +185,5 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
         </android.support.design.widget.TextInputLayout>
     </android.support.constraint.ConstraintLayout>
+</ScrollView>
 </layout>

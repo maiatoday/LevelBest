@@ -48,6 +48,15 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item?.itemId
+        if (id == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     /**
      * {@inheritDoc}
      */
