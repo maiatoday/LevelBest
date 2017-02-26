@@ -5,25 +5,22 @@ import android.content.SharedPreferences
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
-
+import io.realm.Realm
+import io.realm.Sort
 import net.maiatoday.levelbest.LevelBestApplication
 import net.maiatoday.levelbest.R
 import net.maiatoday.levelbest.databinding.ActivityMainBinding
 import net.maiatoday.levelbest.helpers.PreferenceHelper
-import utils.addTest
-
+import net.maiatoday.levelbest.model.Entry
+import net.maiatoday.levelbest.view.adapters.RealmEntryRecyclerAdapter
+import net.maiatoday.levelbest.view.adapters.RealmEntryRecyclerAdapter.OnEntryClick
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnEntryClick {
     @Inject
     lateinit var prefs: SharedPreferences
 
@@ -31,6 +28,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var analytics: FirebaseAnalytics
 
     private var firstTime: Boolean = false
+
+    companion object {
+        private val REQUEST_NEW_ENTRY = 100
+        private val REQUEST_OLD_ENTRY = 101
+    }
+
+    private lateinit var realm: Realm
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -50,19 +54,24 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as LevelBestApplication).component.inject(this)
+        realm = Realm.getDefaultInstance()
         firstTime = prefs.getBoolean(PreferenceHelper.KEY_FIRST_TIME, true)
         PreferenceHelper.write(prefs, PreferenceHelper.KEY_FIRST_TIME, false)
 
         analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
         val navigation = binding.navigation
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        setUpRecyclerView()
 
         val fab = binding.fab
         fab.setOnClickListener { view ->
@@ -71,15 +80,23 @@ class MainActivity : AppCompatActivity() {
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "test")
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
             analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
-            if (firstTime) {
-                Snackbar.make(view, "First Time - Replace with your own action " + addTest(2, 4), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show()
-            } else {
-                Snackbar.make(view, "Replace with your own action " + addTest(4, 4), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show()
-
-            }
-            startActivity(EntryActivity.makeIntent(this, ""))
+            startActivityForResult(EntryActivity.makeIntent(this, ""), REQUEST_NEW_ENTRY)
         }
+    }
+
+    private fun setUpRecyclerView() {
+        binding.entriesContent.list.layoutManager = LinearLayoutManager(this)
+        binding.entriesContent.list.adapter = RealmEntryRecyclerAdapter(this, this, realm.where(Entry::class.java).findAllSortedAsync(Entry.TIMESTAMP, Sort.ASCENDING))
+        binding.entriesContent.list.setHasFixedSize(true)
+        binding.entriesContent.list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+    }
+
+    override fun entryClick(data: Entry) {
+        startActivityForResult(EntryActivity.makeIntent(this, data.id), REQUEST_OLD_ENTRY)
+    }
+
+    override fun onDestroy() {
+        realm.close()
+        super.onDestroy()
     }
 }

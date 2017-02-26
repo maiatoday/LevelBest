@@ -25,4 +25,9 @@ open class Entry : RealmModel {
     open var energyLevel: Int = 0
     open var note:String = ""
     open var title:String = ""
+
+    companion object {
+        val TIMESTAMP = "timeStamp"
+
+    }
 }
