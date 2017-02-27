@@ -28,6 +28,7 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
@@ -54,12 +55,13 @@ class RealmEntryRecyclerAdapter(context: Context, private val handler: RealmEntr
 
         fun bind(obj: Entry): Unit {
             binding.obj = obj
+            binding.handler = handler
             binding.executePendingBindings()
 
         }
     }
 
     interface OnEntryClick {
-        fun entryClick(data: Entry)
+        fun entryClick(view: View, data: Entry)
     }
 }

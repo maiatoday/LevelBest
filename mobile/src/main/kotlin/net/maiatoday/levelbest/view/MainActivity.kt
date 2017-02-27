@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.realm.Realm
 import io.realm.Sort
@@ -17,10 +18,10 @@ import net.maiatoday.levelbest.databinding.ActivityMainBinding
 import net.maiatoday.levelbest.helpers.PreferenceHelper
 import net.maiatoday.levelbest.model.Entry
 import net.maiatoday.levelbest.view.adapters.RealmEntryRecyclerAdapter
-import net.maiatoday.levelbest.view.adapters.RealmEntryRecyclerAdapter.OnEntryClick
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), OnEntryClick {
+class MainActivity : AppCompatActivity(), RealmEntryRecyclerAdapter.OnEntryClick {
+
     @Inject
     lateinit var prefs: SharedPreferences
 
@@ -86,12 +87,14 @@ class MainActivity : AppCompatActivity(), OnEntryClick {
 
     private fun setUpRecyclerView() {
         binding.entriesContent.list.layoutManager = LinearLayoutManager(this)
-        binding.entriesContent.list.adapter = RealmEntryRecyclerAdapter(this, this, realm.where(Entry::class.java).findAllSortedAsync(Entry.TIMESTAMP, Sort.ASCENDING))
+        binding.entriesContent.list.adapter = RealmEntryRecyclerAdapter(this,
+                this,
+                realm.where(Entry::class.java).findAllSortedAsync(Entry.TIMESTAMP, Sort.ASCENDING))
         binding.entriesContent.list.setHasFixedSize(true)
         binding.entriesContent.list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
 
-    override fun entryClick(data: Entry) {
+    override fun entryClick(view: View, data: Entry) {
         startActivityForResult(EntryActivity.makeIntent(this, data.id), REQUEST_OLD_ENTRY)
     }
 
