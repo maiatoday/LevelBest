@@ -7,7 +7,7 @@ buildscript {
         buildToolsVer = '25.0.2'
         sdkVer = 25
 
-        gradleAndroidPluginVersion = '2.3.0-beta3'
+        gradleAndroidPluginVersion = '2.4.0-alpha7'
         // App dependencies
         supportLibraryVersion = '25.2.0'
         playServicesVersion = '10.0.1'
@@ -23,7 +23,8 @@ buildscript {
         realmVersion = '3.2.1'
         realmAdapterVersion = '2.1.0'
 
-        kotlinVersion = '1.1.2-4'
+        //kotlinVersion = '1.1.2-4' see bug https://youtrack.jetbrains.com/issue/KT-17936
+        kotlinVersion = '1.1.2-2'
     }
 
     repositories {
