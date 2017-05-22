@@ -26,6 +26,7 @@ package net.maiatoday.levelbest.view.adapters
 
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.realm.OrderedRealmCollection
@@ -36,9 +37,10 @@ import net.maiatoday.levelbest.model.Entry
 import net.maiatoday.levelbest.model.Mood
 
 
-class MoodRecyclerAdapter(context: Context, private val handler: MoodRecyclerAdapter.OnItemClick, data: OrderedRealmCollection<Mood>) : RealmRecyclerViewAdapter<Mood, BindingViewHolder>(context, data, true) {
+class MoodRecyclerAdapter(private val handler: MoodRecyclerAdapter.OnItemClick, data: OrderedRealmCollection<Mood>) : RealmRecyclerViewAdapter<Mood, BindingViewHolder>(data, true) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         val binding: ItemEntryBinding = DataBindingUtil.inflate(
                 inflater, R.layout.item_mood, parent, false)
         return BindingViewHolder(binding, handler)

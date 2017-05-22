@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), EntryRecyclerAdapter.OnEntryClick {
         setUpRecyclerView()
 
         val fab = binding.fab
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener { _ ->
             val bundle = Bundle()
             bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id")
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "test")
@@ -86,12 +86,11 @@ class MainActivity : AppCompatActivity(), EntryRecyclerAdapter.OnEntryClick {
     }
 
     private fun setUpRecyclerView() {
-        binding.entriesContent.list.layoutManager = LinearLayoutManager(this)
-        binding.entriesContent.list.adapter = EntryRecyclerAdapter(this,
-                this,
+        binding.entriesContent?.list?.layoutManager = LinearLayoutManager(this)
+        binding.entriesContent?.list?.adapter = EntryRecyclerAdapter(this,
                 realm.where(Entry::class.java).findAllSortedAsync(Entry.TIMESTAMP, Sort.ASCENDING))
-        binding.entriesContent.list.setHasFixedSize(true)
-        binding.entriesContent.list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        binding.entriesContent?.list?.setHasFixedSize(true)
+        binding.entriesContent?.list?.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
 
     override fun entryClick(view: View, data: Entry) {

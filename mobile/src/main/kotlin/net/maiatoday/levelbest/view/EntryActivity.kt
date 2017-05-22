@@ -71,7 +71,7 @@ class EntryActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.viewModel.close()
+        binding.viewModel?.close()
     }
 
     private fun showStatus(txt: String) {
