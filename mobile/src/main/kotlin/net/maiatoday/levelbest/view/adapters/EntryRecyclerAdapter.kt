@@ -26,8 +26,6 @@ package net.maiatoday.levelbest.view.adapters
 
 import android.content.Context
 import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.realm.OrderedRealmCollection
@@ -37,28 +35,17 @@ import net.maiatoday.levelbest.databinding.ItemEntryBinding
 import net.maiatoday.levelbest.model.Entry
 
 
-class RealmEntryRecyclerAdapter(context: Context, private val handler: RealmEntryRecyclerAdapter.OnEntryClick, data: OrderedRealmCollection<Entry>) : RealmRecyclerViewAdapter<Entry, RealmEntryRecyclerAdapter.EntryViewHolder>(context, data, true) {
+class EntryRecyclerAdapter(context: Context, private val handler: EntryRecyclerAdapter.OnEntryClick, data: OrderedRealmCollection<Entry>) : RealmRecyclerViewAdapter<Entry, BindingViewHolder>(context, data, true) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
         val binding: ItemEntryBinding = DataBindingUtil.inflate(
-                layoutInflater, R.layout.item_entry, parent, false)
-        return EntryViewHolder(binding)
+                inflater, R.layout.item_entry, parent, false)
+        return BindingViewHolder(binding, handler)
     }
 
-    override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
         val obj = data!![position]
         holder.bind(obj)
-    }
-
-    inner class EntryViewHolder(private val binding: ItemEntryBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(obj: Entry): Unit {
-            binding.obj = obj
-            binding.handler = handler
-            binding.executePendingBindings()
-
-        }
     }
 
     interface OnEntryClick {

@@ -17,10 +17,10 @@ import net.maiatoday.levelbest.R
 import net.maiatoday.levelbest.databinding.ActivityMainBinding
 import net.maiatoday.levelbest.helpers.PreferenceHelper
 import net.maiatoday.levelbest.model.Entry
-import net.maiatoday.levelbest.view.adapters.RealmEntryRecyclerAdapter
+import net.maiatoday.levelbest.view.adapters.EntryRecyclerAdapter
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), RealmEntryRecyclerAdapter.OnEntryClick {
+class MainActivity : AppCompatActivity(), EntryRecyclerAdapter.OnEntryClick {
 
     @Inject
     lateinit var prefs: SharedPreferences
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(), RealmEntryRecyclerAdapter.OnEntryClick
 
     private fun setUpRecyclerView() {
         binding.entriesContent.list.layoutManager = LinearLayoutManager(this)
-        binding.entriesContent.list.adapter = RealmEntryRecyclerAdapter(this,
+        binding.entriesContent.list.adapter = EntryRecyclerAdapter(this,
                 this,
                 realm.where(Entry::class.java).findAllSortedAsync(Entry.TIMESTAMP, Sort.ASCENDING))
         binding.entriesContent.list.setHasFixedSize(true)
